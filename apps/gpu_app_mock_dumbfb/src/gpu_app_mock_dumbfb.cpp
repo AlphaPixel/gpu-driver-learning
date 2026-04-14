@@ -1,0 +1,11 @@
+#include <fmt/base.h>
+#include <gpu_app_mock_dumbfb/helpers.hpp>
+
+int main() {
+  fmt::print("Hello {} !", "world");
+
+  auto some_num = some_fun();
+  fmt::print("\nsome_num is: {}\n", some_num);
+
+  return 0;
+}

@@ -1,0 +1,27 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+    "name": "gpu-driver-learning",
+    "version": "0.1.0",
+    "builtin-baseline": "50c0cb48a0cf2f6fc5c7b2c0d2bafbe26d0a7ca2",
+    "dependencies": [
+        {
+            "name": "catch2",
+            "version>=": "3.8.0"
+        },
+        {
+            "name": "fmt",
+            "version>=": "11.0.2"
+        }
+    ],
+    "features": {
+        "tests": {
+            "description": "Build the tests of the package's tests",
+            "dependencies": [
+                {
+                    "name": "catch2",
+                    "version>=": "3.8.0"
+                }
+            ]
+        }
+    }
+}

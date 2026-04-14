@@ -39,3 +39,9 @@
 
 # debug information files
 *.dwo
+# ignore files we don't want in the repo
+_*
+
+# build environment files
+.vs
+build/

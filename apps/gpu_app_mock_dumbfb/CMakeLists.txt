@@ -1,0 +1,40 @@
+# Separate library part and executable part (`main()` function) to simplify testing.
+
+# ----------------------------------------------------------------------------------------------------------------------
+# library part
+add_library(gpu_app_mock_dumbfb_lib INTERFACE) # use interface or normal library according to the implementation
+# link project_options/warnings
+target_link_libraries(gpu_app_mock_dumbfb_lib INTERFACE gpu_project_options gpu_project_warnings)
+
+# Includes
+target_include_interface_directories(gpu_app_mock_dumbfb_lib include)
+
+# Find dependencies:
+target_find_dependencies(gpu_app_mock_dumbfb_lib INTERFACE_CONFIG fmt)
+set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
+                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+
+# Link dependencies:
+target_link_system_libraries(gpu_app_mock_dumbfb_lib INTERFACE fmt::fmt)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# executable part
+add_executable(gpu_app_mock_dumbfb "./src/gpu_app_mock_dumbfb.cpp") # just for `main.cpp` which contains `main()` function
+# link project_options/warnings
+target_link_libraries(gpu_app_mock_dumbfb PRIVATE gpu_project_options gpu_project_warnings)
+
+# Includes, just link the library part
+target_link_libraries(gpu_app_mock_dumbfb PRIVATE gpu_app_mock_dumbfb_lib)
+
+# Find dependencies:
+target_find_dependencies(gpu_app_mock_dumbfb PRIVATE_CONFIG fmt)
+set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
+                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+# Link dependencies
+target_link_system_libraries(gpu_app_mock_dumbfb PRIVATE fmt::fmt)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# tests
+if(FEATURE_TESTS)
+  add_subdirectory("./test")
+endif()
