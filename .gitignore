@@ -45,3 +45,8 @@ _*
 # build environment files
 .vs
 build/
+
+# LLM tooling
+CLAUDE.md
+CLAUDE.local.md
+.claude/

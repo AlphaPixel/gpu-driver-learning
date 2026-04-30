@@ -11,6 +11,12 @@
         {
             "name": "fmt",
             "version>=": "11.0.2"
+        },
+        {
+            "name": "sdl3"
+        },
+        {
+            "name": "glfw3"
         }
     ],
     "features": {
