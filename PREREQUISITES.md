@@ -28,7 +28,10 @@ Students should understand:
 - scanout as “copy memory to the display”
 - why a framebuffer is just structured memory
 
-### Required reading
+### Recommended reading
+
+#### Peter Occil — *Graphics and Music Challenges for Classic-Style Computer Applications*
+<https://peteroupc.github.io/graphics.html#Graphics_Challenge_for_Classic_Style_Games>
 
 #### Scratchapixel — *An Overview of the Rasterization Algorithm*
 This is the best text-first foundation for the project. It explains what rasterization is, why it exists, and how it maps geometry onto a pixel grid. Read this first.  
