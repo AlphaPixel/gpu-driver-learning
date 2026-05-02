@@ -41,20 +41,21 @@ The build system uses **vcpkg in manifest mode**. This means all C++ dependencie
 On Ubuntu 22.04 or later:
 
 ```bash
-sudo apt update
-sudo apt install build-essential git cmake ninja-build \
-    libx11-dev libxrandr-dev libxi-dev libxinerama-dev \
-    libxcursor-dev libgl-dev libgles-dev libwayland-dev \
-    libxkbcommon-dev
+  sudo apt update
+  sudo apt install build-essential git cmake ninja-build \
+      xorg-dev libglu1-mesa-dev libwayland-dev \
+      libxkbcommon-dev libgles-dev pkg-config
 ```
 
 On Fedora / RHEL derivatives:
 
 ```bash
 sudo dnf install gcc-c++ git cmake ninja-build \
-    libX11-devel libXrandr-devel libXi-devel \
-    libXinerama-devel libXcursor-devel mesa-libGL-devel
-```
+      pkgconf-pkg-config \
+      libX11-devel libXrandr-devel libXi-devel \
+      libXinerama-devel libXcursor-devel \
+      mesa-libGL-devel mesa-libGLU-devel mesa-libGLES-devel \
+      wayland-devel libxkbcommon-devel```
 
 > The X11 and GL headers are needed even though SDL3 and GLFW are built from source by vcpkg, because those libraries link against the system X11 and OpenGL at runtime.
 
