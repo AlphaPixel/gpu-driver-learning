@@ -17,6 +17,8 @@ target_link_libraries(gpu_lib_mock_dumbfb
         gpu_project_warnings
 )
 
+target_compile_options(gpu_lib_mock_dumbfb PRIVATE $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+
 # Public C++ headers  →  #include <pixelgpu/...>
 target_include_directories(gpu_lib_mock_dumbfb
     PUBLIC

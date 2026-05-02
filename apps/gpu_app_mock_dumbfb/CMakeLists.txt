@@ -9,10 +9,7 @@ target_link_libraries(gpu_app_mock_dumbfb_lib INTERFACE gpu_project_options gpu_
 # Includes
 target_include_interface_directories(gpu_app_mock_dumbfb_lib include)
 
-# Find dependencies:
-target_find_dependencies(gpu_app_mock_dumbfb_lib INTERFACE_CONFIG fmt)
-set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
-                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+target_compile_options(gpu_app_mock_dumbfb_lib INTERFACE $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
 
 # Link dependencies:
 target_link_system_libraries(gpu_app_mock_dumbfb_lib INTERFACE fmt::fmt)
@@ -43,11 +40,6 @@ if(WIN32)
         COMMAND_EXPAND_LISTS
     )
 endif()
-
-# Find dependencies:
-target_find_dependencies(gpu_app_mock_dumbfb PRIVATE_CONFIG fmt)
-set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
-                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
 # Link dependencies
 target_link_system_libraries(gpu_app_mock_dumbfb PRIVATE fmt::fmt)
 
