@@ -44,6 +44,17 @@ The work is divided into nine progressive phases, each one preserving the public
 ### Phase 1: Virtual Display Hardware
 Create a desktop window (SDL or similar) backed by a byte array that acts as VRAM. Present that memory to the screen once per frame.
 
+Exercise the framebuffer with several colorful and exciting drawing examples.
+
+Sample output:
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/lesson1-challenge3-blue.png)
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/lesson1-challenge4.png)
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/lesson1-challenge5.png)
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/demo-colorbars.png)
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/demo-movingsquare.png)
+![Lesson 1 Project Screenshot](docs/apps/gpu_app_mock_dumbfb/media/demo-plasmabars.png)
+
+
 ### Phase 2: Dumb 2D Framebuffer Driver
 Build a software driver library implementing primitives such as pixel plot, lines, rectangle fill, clipping, blits, and text.
 
