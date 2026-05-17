@@ -17,10 +17,14 @@ include(${_project_options_SOURCE_DIR}/Index.cmake)
 
 include("./Features.cmake")
 
-# Install vcpkg dependencies — must come before project()
-run_vcpkg(
-  VCPKG_URL "https://github.com/microsoft/vcpkg.git"
-  VCPKG_REV "50c0cb48a0cf2f6fc5c7b2c0d2bafbe26d0a7ca2")
+option(ENABLE_VCPKG "Use vcpkg to install dependencies" ${WIN32})
+
+# Install vcpkg dependencies when enabled — must come before project()
+if(ENABLE_VCPKG)
+  run_vcpkg(
+    VCPKG_URL "https://github.com/microsoft/vcpkg.git"
+    VCPKG_REV "50c0cb48a0cf2f6fc5c7b2c0d2bafbe26d0a7ca2")
+endif()
 
 project(
   gpu_driver_learning
@@ -29,9 +33,10 @@ project(
   HOMEPAGE_URL "https://github.com/AlphaPixel/gpu-driver-learning"
   LANGUAGES CXX C)
 
+include("./cmake/Dependencies.cmake")
+
 if(FEATURE_TESTS)
   enable_testing()
-  find_package(Catch2 REQUIRED)
   add_library(catch2_test_common INTERFACE)
   target_find_dependencies(catch2_test_common INTERFACE_CONFIG Catch2)
   target_link_libraries(catch2_test_common INTERFACE Catch2::Catch2 Catch2::Catch2WithMain)

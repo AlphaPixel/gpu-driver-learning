@@ -19,7 +19,7 @@ Build a desktop application using SDL (or similar) that creates a window and tre
 - width, height, stride, and pixel formats
 - scanout and presentation
 - refresh timing
-- double buffering
+~~- double buffering~~ (deferred until later phases)
 - mode setting
 
 ### Deliverables
@@ -37,20 +37,24 @@ Students understand how display memory becomes visible pixels.
 
 **Objective:** implement classic software rendering primitives.
 
-All drawing is performed in software through a driver library targeting the virtual framebuffer.
+All drawing is performed in software through a driver library targeting the virtual framebuffer. The features implemented will mimic a subset of a basic 2D hardware-accelerated graphics co-processor similar to the Amiga Agnus ( https://en.wikipedia.org/wiki/MOS_Technology_Agnus ) chip, capable of rectangular memory transfer operations and line drawing without CPU attention.
 
 ### Topics
 - pixel plot and readback
 - Bresenham lines
-- rectangle outline and fill
-- clipping
+- rectangle outline and fill with solid colors
+- basic pixel, rectangle and line clipping
 - blits and copies
-- transparent blits
+- transparent blits (possible stretch goal: multichannel blit opertors a la Amiga Agnus Blitter)
 - bitmap text
 - color conversion
 
+### Sub-phases
+- Phase 2a: Program-space implementation of functionality
+- Phase 2b: Abstraction of program-space implementation into a semi-opaque link library behind a defined API (still presenting as CPU-driven)
+
 ### Deliverables
-- reusable 2D driver library
+- reusable 2D driver library (Phase 2b)
 - primitive demo scenes
 - clipping and overlap tests
 

@@ -9,10 +9,7 @@ target_link_libraries(gpu_app_mock_dumbfb_lib INTERFACE gpu_project_options gpu_
 # Includes
 target_include_interface_directories(gpu_app_mock_dumbfb_lib include)
 
-# Find dependencies:
-target_find_dependencies(gpu_app_mock_dumbfb_lib INTERFACE_CONFIG fmt)
-set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
-                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+target_compile_options(gpu_app_mock_dumbfb_lib INTERFACE $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
 
 # Link dependencies:
 target_link_system_libraries(gpu_app_mock_dumbfb_lib INTERFACE fmt::fmt)
@@ -26,10 +23,23 @@ target_link_libraries(gpu_app_mock_dumbfb PRIVATE gpu_project_options gpu_projec
 # Includes, just link the library part
 target_link_libraries(gpu_app_mock_dumbfb PRIVATE gpu_app_mock_dumbfb_lib)
 
-# Find dependencies:
-target_find_dependencies(gpu_app_mock_dumbfb PRIVATE_CONFIG fmt)
-set_target_properties(fmt::fmt PROPERTIES INTERFACE_COMPILE_OPTIONS
-                                          $<$<AND:$<COMPILE_LANGUAGE:CXX>,$<CXX_COMPILER_ID:MSVC>>:/utf-8>)
+# Link the display library with WHOLE_ARCHIVE so the MSVC linker keeps the
+# backend registrar objects (sdl3_registrar.obj, glfw_registrar.obj), which
+# have no externally-referenced symbols and would otherwise be stripped.
+# WHOLE_ARCHIVE also propagates the library's PUBLIC include directories.
+target_link_libraries(gpu_app_mock_dumbfb PRIVATE
+    $<LINK_LIBRARY:WHOLE_ARCHIVE,gpu_lib_mock_dumbfb>)
+
+# Copy runtime DLLs (SDL3, GLFW, fmt) next to the executable on Windows so
+# it can run without manually setting PATH.
+if(WIN32)
+    add_custom_command(TARGET gpu_app_mock_dumbfb POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:gpu_app_mock_dumbfb>
+            $<TARGET_FILE_DIR:gpu_app_mock_dumbfb>
+        COMMAND_EXPAND_LISTS
+    )
+endif()
 # Link dependencies
 target_link_system_libraries(gpu_app_mock_dumbfb PRIVATE fmt::fmt)
 

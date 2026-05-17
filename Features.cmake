@@ -1,3 +1,8 @@
+# display backends
+option(FEATURE_BACKEND_SDL3 "Enable SDL3 display backend"      ON)
+option(FEATURE_BACKEND_GLFW "Enable GLFW display backend"      ON)
+option(FEATURE_BACKEND_VNC  "Enable VNC/libvncserver backend"  OFF)
+
 # building the tests
 option(FEATURE_TESTS "Enable the tests" OFF)
 if(FEATURE_TESTS)
