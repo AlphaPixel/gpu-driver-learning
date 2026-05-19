@@ -28,29 +28,29 @@
 // ---------------------------------------------------------------------------
 // XBGR8888 pixel packing helper (you can rewrite this yourself from scratch)
 // ---------------------------------------------------------------------------
-//static inline uint32_t xbgr(uint8_t r, uint8_t g, uint8_t b) noexcept {
-//    // Byte layout in memory: [B][G][R][X]
-//    // As a uint32_t on little-endian: X=byte3, R=byte2, G=byte1, B=byte0
-//    return (static_cast<uint32_t>(0xFF) << 24)  // X = 0xFF (unused)
-//         | (static_cast<uint32_t>(r)    << 16)
-//         | (static_cast<uint32_t>(g)    <<  8)
-//         | (static_cast<uint32_t>(b));
-//}
+static inline uint32_t xbgr(uint8_t r, uint8_t g, uint8_t b) noexcept {
+    // Byte layout in memory: [B][G][R][X]
+    // As a uint32_t on little-endian: X=byte3, R=byte2, G=byte1, B=byte0
+    return (static_cast<uint32_t>(0xFF) << 24)  // X = 0xFF (unused)
+         | (static_cast<uint32_t>(r)    << 16)
+         | (static_cast<uint32_t>(g)    <<  8)
+         | (static_cast<uint32_t>(b));
+}
 
 // ---------------------------------------------------------------------------
 // Plot a single pixel into the framebuffer (no bounds check — caller beware!)
 // ---------------------------------------------------------------------------
-//static inline void plot(uint32_t* fb, uint32_t stride_px,
-//                        uint32_t x, uint32_t y, uint32_t color) noexcept {
-//    fb[y * stride_px + x] = color;
-//}
+static inline void plot(uint32_t* fb, uint32_t stride_px,
+                        uint32_t x, uint32_t y, uint32_t color) noexcept {
+    fb[y * stride_px + x] = color;
+}
 
 // ---------------------------------------------------------------------------
 // Fill the entire framebuffer with one colour (can re-implement for practice)
 // ---------------------------------------------------------------------------
-//static void fill(uint32_t* fb, uint32_t npixels, uint32_t color) noexcept {
-//    for (uint32_t i = 0; i < npixels; ++i)
-//        fb[i] = color;
+static void fill(uint32_t* fb, uint32_t npixels, uint32_t color) noexcept {
+    for (uint32_t i = 0; i < npixels; ++i)
+        fb[i] = color;
 //}
 
 
